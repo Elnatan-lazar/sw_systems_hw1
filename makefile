@@ -25,7 +25,7 @@ main.o: main.c $(H)
 
 #static librarys:
 
-loop_s: libclassloops.a
+loops: libclassloops.a
 
 libclassloops.a: $(Loop)
 	ar rcs libclassloops.a $(Loop)
@@ -38,7 +38,7 @@ libclassrec.a: $(Rec)
 
 #Dynamic librarys:
 #loop 
-loop_d: libclassloops.so
+loopd: libclassloops.so
 
 libclassloops.so: $(Loop)
 	$(CC) -shared -fpic -o libclassloops.so $(Loop)
@@ -59,7 +59,7 @@ maindrec: libclassrec.so
 
 #Create all
 .PHONY: all
-all: mains loop_d maindloop maindrec loop_s recursive_d recursive_s
+all: mains loopd maindloop maindrec loops recursive_d recursive_s
 
 .PHONY: clean
 clean:
@@ -67,6 +67,6 @@ clean:
 	rm -f *.a
 	rm -f *.so
 	rm -f mains
-	rm -f loop_d
+	rm -f loopd
 	rm -f maindloop
 	rm -f maindrec
