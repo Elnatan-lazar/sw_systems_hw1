@@ -18,14 +18,14 @@ basicClassification.o: basicClassification.c $(H)
 	$(CC) $(GW) -c basicClassification.c
 advancedClassificationRecursion.o: advancedClassificationRecursion.c $(H)
 	$(CC) $(GW) -c advancedClassificationRecursion.c
-	
+
 main.o: main.c $(H)
 	$(CC) $(GW) -c main.c
 
 
 #static librarys:
 
-loops: libclassloops.a
+loop_s: libclassloops.a
 
 libclassloops.a: $(Loop)
 	ar rcs libclassloops.a $(Loop)
@@ -38,7 +38,7 @@ libclassrec.a: $(Rec)
 
 #Dynamic librarys:
 #loop 
-loopd: libclassloops.so
+loop_d: libclassloops.so
 
 libclassloops.so: $(Loop)
 	$(CC) -shared -fpic -o libclassloops.so $(Loop)
@@ -59,7 +59,7 @@ maindrec: libclassrec.so
 
 #Create all
 .PHONY: all
-all: mains loopd maindloop maindrec loops recursive_d recursive_s
+all: mains loop_d maindloop maindrec loop_s recursive_d recursive_s
 
 .PHONY: clean
 clean:
@@ -67,6 +67,6 @@ clean:
 	rm -f *.a
 	rm -f *.so
 	rm -f mains
-	rm -f loopd
+	rm -f loop_d
 	rm -f maindloop
 	rm -f maindrec
